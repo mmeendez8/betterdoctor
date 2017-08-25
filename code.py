@@ -1,11 +1,3 @@
-
-# coding: utf-8
-
-# # Read data from files and prepare data structures
-# 
-
-# In[203]:
-
 import ujson as json
 import pandas as pd
 from IPython.display import display
@@ -53,9 +45,6 @@ print ("Total number of documents scanned in source_data.json file is: ", len(do
 print ("Total number of documents scanned in match_file.csv file is: ", len(raw_data))
 
 
-# # # of Doctors matched with NPI
-
-# In[205]:
 
 npi_match = raw_data.merge(docs, on=['npi'])
 
@@ -63,9 +52,6 @@ print("Number of doctors matched with NPI is: ",len(npi_match))
 # display(npi_match)
 
 
-# # # of Practice matched with address
-
-# In[206]:
 
 # Same address
 values = ['street','street_2','city','state', 'zip']
@@ -74,9 +60,6 @@ same_add = raw_data.merge(pracs, on=values)
 print("Number of practices matched with same address is: ",len(same_add))
 
 
-# # # of Doctors matched with name and address
-
-# In[207]:
 
 # Same address tables
 raw_ = raw_data.loc[same_add['index_x']]
@@ -89,11 +72,6 @@ same_add_name = raw_.merge(docs_, on=['first_name', 'last_name'])
 print("Number of doctors matched with same name and address is: ",len(same_add_name))
 
 
-# We must note that in all cases we got an address matching we also obtained a name matching.
-
-# # # of documents that could not be matched
-
-# In[208]:
 
 # Append indexes of matched docs
 matched_elements =  npi_match['index_x'].append(same_add['index_x']).unique()
